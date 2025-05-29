@@ -1,5 +1,6 @@
 // filepath: c:\Users\Daniel\Documents\GitHub\hotel-landing-page\src\components\Sections\About.tsx
 import React from "react";
+import "../../styles/globals.css";
 
 const About: React.FC = () => {
   return (
