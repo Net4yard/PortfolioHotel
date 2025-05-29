@@ -15,7 +15,6 @@ const App: React.FC = () => {
     <div>
       <Parallax pages={6}>
         <Navbar />
-
         <ParallaxLayer offset={0} speed={0.5}>
           <Hero />
         </ParallaxLayer>
