@@ -1,19 +1,19 @@
-// filepath: c:\Users\Daniel\Documents\GitHub\hotel-landing-page\src\components\Sections\Hero.tsx
-import React from "react";
+import React, { useState, useEffect } from "react";
 import { ParallaxLayer } from "@react-spring/parallax";
 import "../../styles/globals.css";
 import { useTrail, a } from "@react-spring/web";
 
 // Define Trail component outside of Hero to prevent re-initialization on Hero re-renders
-const Trail: React.FC<{ children: React.ReactNode }> = ({ children }) => {
+const Trail: React.FC<{ open: boolean }> = ({ children }) => {
   const items = React.Children.toArray(children);
   const trail = useTrail(items.length, {
     config: { mass: 5, tension: 2000, friction: 250 },
     opacity: 1,
     x: 0,
     height: 125,
-    from: { opacity: 0, x: 0, height: 0 },
+    from: { opacity: 0, x: 30, height: 0 },
   });
+
   return (
     <div>
       {trail.map(({ height, ...style }, index) => (
@@ -40,7 +40,7 @@ const Hero: React.FC = () => {
       }}
       className="hero"
     >
-      <Trail>
+      <Trail open={true}>
         <h1 style={{ fontSize: "6rem", color: "#fff" }}>Portfolio</h1>
         <h1 style={{ fontSize: "6rem", color: "#fff" }}>Hotel</h1>
 
