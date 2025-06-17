@@ -1,10 +1,19 @@
 // filepath: c:\Users\Daniel\Documents\GitHub\hotel-landing-page\src\components\Sections\About.tsx
 import React from "react";
 import "../../styles/globals.css";
+import { ParallaxLayer } from "@react-spring/parallax";
 
 const About: React.FC = () => {
   return (
-    <section id="about" style={{ padding: "50px", textAlign: "center" }}>
+    <ParallaxLayer
+      offset={1.0}
+      speed={0}
+      style={{
+        display: "flex",
+        alignItems: "center",
+        justifyContent: "center",
+      }}
+    >
       <h2>About Our Hotel</h2>
       <p>
         Welcome to our hotel, where luxury meets comfort. Our hotel offers a
@@ -17,7 +26,7 @@ const About: React.FC = () => {
         options, and a range of recreational activities to make your stay
         unforgettable.
       </p>
-    </section>
+    </ParallaxLayer>
   );
 };
 

@@ -1,0 +1,119 @@
+.navContainer {
+  width: 100%;
+  padding: 1rem 2rem;
+  background-color: rgba(223, 223, 223, 0);
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: 10;
+  transition: background-color 0.3s ease-in-out, box-shadow 0.3s ease-in-out; /* Smooth transition */
+
+  backdrop-filter: blur(0);
+  -webkit-backdrop-filter: blur(0);
+}
+
+.navContainer.scrolled {
+  background-color: rgba(223, 223, 223, 0.85);
+  box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
+  backdrop-filter: blur(10.7px);
+  -webkit-backdrop-filter: blur(10.7px);
+
+  .siteTitle {
+    color: #000; /* White text */
+    font-size: 1.5rem; /* Larger font size */
+    font-weight: bold;
+    text-decoration: none; /* Remove underline */
+    transition: all 0.3s ease !important;
+  }
+
+  .bookButton {
+    background-color: #f5f5f5 !important;
+    color: #1a1a1a !important;
+    padding-left: 30px !important;
+    padding-right: 30px !important;
+    border-radius: 10px;
+    border: 1px solid #1a1a1a;
+    margin-left: 20px !important;
+
+    transition: all 0.3s ease !important;
+  }
+
+  .bookButton:hover {
+    background-color: #c5a880 !important;
+    color: #fff !important;
+    border: 1px solid #fff;
+
+    transition: all 0.3s ease !important;
+  }
+
+  .navLink {
+    color: #1a1a1a;
+    text-decoration: none;
+    transition: color 0.3s ease;
+    background-color: transparent;
+
+    padding: 8px;
+  }
+
+  .navLink:hover {
+    color: #1a1a1a;
+  }
+}
+
+.navContainer > div {
+  max-width: 1200px; /* Max width for content */
+  margin: 0 auto; /* Center the content */
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.siteTitle {
+  color: #fff; /* White text */
+  font-size: 1.5rem; /* Larger font size */
+  font-weight: bold;
+  text-decoration: none; /* Remove underline */
+
+  transition: all 0.3s ease !important;
+}
+
+.navLinks {
+  display: flex;
+  gap: 1.5rem; /* Space between links */
+}
+
+.bookButton {
+  background-color: transparent !important;
+  color: #dfdfdf !important;
+  padding-left: 30px !important;
+  padding-right: 30px !important;
+  border-radius: 20px;
+  border: 1px solid #dfdfdf;
+  margin-left: 20px !important;
+
+  transition: all 0.3s ease !important;
+}
+
+.bookButton:hover {
+  background-color: transparent !important;
+  color: #fff !important;
+  border: 1px solid #fff;
+
+  transition: all 0.3s ease !important;
+}
+
+.navLink {
+  color: #dfdfdf;
+  text-decoration: none;
+  transition: color 0.3s ease;
+  background-color: transparent;
+
+  padding: 8px;
+}
+
+.navLink:hover {
+  color: #fff;
+  background-color: transparent;
+
+  transition: color 0.3s ease;
+}
