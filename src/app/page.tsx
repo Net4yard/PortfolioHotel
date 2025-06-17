@@ -41,7 +41,12 @@ const App: React.FC = () => {
 
   return (
     <div>
-      <AnimatedCursor />
+      <AnimatedCursor
+        innerSize={15}
+        outerSize={15}
+        outerScale={3}
+        color="255, 255, 255"
+      />
       <Navbar scrolled={isNavbarScrolled} />
 
       <Parallax pages={2} ref={parallaxRef}>
