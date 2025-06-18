@@ -17,9 +17,10 @@
 
 html {
   scroll-behavior: smooth;
+  background-color: #1a1a1a;
 
   scrollbar-width: 8px;
-  scrollbar-color: var(--secondary-color) transparent; /* Thumb color, Track color */
+  scrollbar-color: var(--primary-color) transparent; /* Thumb color, Track color */
   &::-webkit-scrollbar {
     width: 4px;
   }
