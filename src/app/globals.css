@@ -1,7 +1,7 @@
 @import url("https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;500;600;700&family=Poppins:wght@300;400;500;600&display=swap");
 
 :root {
-  --primary-color: #c5a880;
+  --primary-color: rgba(223, 223, 223);
   --secondary-color: #1a1a1a;
   --text-color: #333333;
   --light-bg: #f5f5f5;
@@ -17,6 +17,25 @@
 
 html {
   scroll-behavior: smooth;
+
+  scrollbar-width: 8px;
+  scrollbar-color: var(--secondary-color) transparent; /* Thumb color, Track color */
+  &::-webkit-scrollbar {
+    width: 4px;
+  }
+
+  &::-webkit-scrollbar-track {
+    background: transparent;
+  }
+  &::-webkit-scrollbar-thumb {
+    background-color: var(--primary-color);
+    border-radius: 20px;
+    border: 2px solid transparent;
+    background-clip: padding-box;
+  }
+  &::-webkit-scrollbar-thumb:hover {
+    background-color: rgba(223, 223, 223, 0.8);
+  }
 }
 
 body {
