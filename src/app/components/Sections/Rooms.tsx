@@ -1,6 +1,7 @@
-// filepath: c:\Users\Daniel\Documents\GitHub\hotel-landing-page\src\components\Sections\Rooms.tsx
-import React, { useRef, useState } from "react"; // Import useState
+/* eslint-disable react-hooks/rules-of-hooks */
+import React, { useState } from "react";
 import { ParallaxLayer } from "@react-spring/parallax";
+import { useSpring, animated } from "@react-spring/web";
 import "./rooms.css";
 
 interface Room {
@@ -8,6 +9,7 @@ interface Room {
   name: string;
   description: string;
   imageUrl: string;
+  roomImages: string[];
   price: string;
 }
 
@@ -16,79 +18,125 @@ const rooms: Room[] = [
     id: 1,
     name: "Luxury Suite",
     description: "Spacious suite with ocean view and private balcony",
-    imageUrl: "/images/luxury-suite.jpg", // Make sure to add your images
+    imageUrl:
+      "https://images.pexels.com/photos/271624/pexels-photo-271624.jpeg",
+    roomImages: [
+      "https://images.pexels.com/photos/271618/pexels-photo-271618.jpeg",
+      "https://images.pexels.com/photos/271624/pexels-photo-271624.jpeg",
+      "https://images.pexels.com/photos/271624/pexels-photo-271624.jpeg",
+    ],
     price: "$299/night",
   },
   {
     id: 2,
     name: "Deluxe Room",
     description: "Comfortable room with modern amenities",
-    imageUrl: "/images/deluxe-room.jpg",
+    imageUrl:
+      "https://images.pexels.com/photos/775219/pexels-photo-775219.jpeg",
+    roomImages: [
+      "https://images.pexels.com/photos/271639/pexels-photo-271639.jpeg",
+      "https://images.pexels.com/photos/271618/pexels-photo-271618.jpeg",
+      "https://images.pexels.com/photos/271624/pexels-photo-271624.jpeg",
+    ],
     price: "$199/night",
   },
   {
     id: 3,
     name: "Presidential Suite",
     description: "Ultimate luxury with panoramic views",
-    imageUrl: "/images/presidential-suite.jpg",
+    imageUrl:
+      "https://images.pexels.com/photos/189333/pexels-photo-189333.jpeg",
+    roomImages: [
+      "https://images.pexels.com/photos/271624/pexels-photo-271624.jpeg",
+      "https://images.pexels.com/photos/271624/pexels-photo-271624.jpeg",
+      "https://images.pexels.com/photos/271624/pexels-photo-271624.jpeg",
+    ],
     price: "$499/night",
   },
 ];
 
 const Rooms: React.FC = () => {
-  const [activeBg, setActiveBg] = useState<string | null>(null);
-  const [prevBg, setPrevBg] = useState<string | null>(null);
-  const bgTimeoutRef = useRef<NodeJS.Timeout>();
+  const [selectedCard, setSelectedCard] = useState<number | null>(null);
+  const [currentImageIndex, setCurrentImageIndex] = useState(0);
 
-  const handleMouseEnter = (imageUrl: string) => {
-    if (activeBg !== imageUrl) {
-      setPrevBg(activeBg);
-      setActiveBg(imageUrl);
+  // Background fade animation
+  const bgStyle = useSpring({
+    opacity: selectedCard ? 1 : 0,
+    config: { duration: 800 },
+  });
+
+  // Card hover animation - removed the opacity animation
+  const getCardAnimation = (roomId: number) => {
+    return useSpring({
+      transform: selectedCard === roomId ? "scale(1.05)" : "scale(1)",
+      config: { tension: 300, friction: 20 },
+    });
+  };
+
+  // Room image hover animation
+  const getRoomImageAnimation = (roomId: number) => {
+    return useSpring({
+      opacity: selectedCard === roomId ? 1 : 0,
+      config: { duration: 400 },
+    });
+  };
+
+  // Image cycling effect
+  React.useEffect(() => {
+    let interval: NodeJS.Timeout;
+    if (selectedCard) {
+      interval = setInterval(() => {
+        const room = rooms.find((r) => r.id === selectedCard);
+        if (room) {
+          setCurrentImageIndex((prev) => (prev + 1) % room.roomImages.length);
+        }
+      }, 3000);
     }
-  };
-
-  const handleMouseLeave = () => {
-    clearTimeout(bgTimeoutRef.current);
-    bgTimeoutRef.current = setTimeout(() => {
-      setPrevBg(activeBg);
-      setActiveBg(null);
-    }, 300); // Small delay to prevent flickering
-  };
+    return () => clearInterval(interval);
+  }, [selectedCard]);
 
   return (
-    <ParallaxLayer
-      offset={0} // Adjust this based on your parallax setup
-      speed={0.5} // Adjust speed as needed
-      className="rooms-section parallax-layer"
-      style={{ backgroundColor: "#f0f0f0" }}
-    >
+    <ParallaxLayer offset={1} speed={0} style={{}}>
       <div className="rooms-section">
-        {prevBg && (
-          <div
-            className="rooms-section-dynamic-bg fade-out"
-            style={{ backgroundImage: `url(${prevBg})` }}
-          />
-        )}
-        {activeBg && (
-          <div
-            className="rooms-section-dynamic-bg active"
-            style={{ backgroundImage: `url(${activeBg})` }}
-          />
-        )}
-        <div className="rooms-section-content-wrapper">
-          <h1>Our Rooms</h1>
-          <div className="room-cards-container">
-            {rooms.map((room: any) => (
-              <div
-                key={room.id}
-                className="room-card"
-                onMouseEnter={() => handleMouseEnter(room.imageUrl)}
-                onMouseLeave={handleMouseLeave}
-              >
-                {/* Rest of your room card content */}
+        <animated.div
+          className="rooms-section-dynamic-bg"
+          style={{
+            ...bgStyle,
+            backgroundImage: selectedCard
+              ? `url(${
+                  rooms.find((r) => r.id === selectedCard)?.roomImages[
+                    currentImageIndex
+                  ]
+                })`
+              : "none",
+          }}
+        />
+
+        <div className="rooms-container">
+          {rooms.map((room) => (
+            <animated.div
+              key={room.id}
+              className="room-card"
+              style={getCardAnimation(room.id)}
+              onClick={() => {
+                setSelectedCard((prev) => (prev === room.id ? null : room.id));
+                setCurrentImageIndex(0);
+              }}
+            >
+              <animated.div
+                className="room-image"
+                style={{
+                  backgroundImage: `url(${room.imageUrl})`,
+                  opacity: getRoomImageAnimation(room.id).opacity,
+                }}
+              />
+              <div className="room-card-content">
+                <h3>{room.name}</h3>
+                <p>{room.description}</p>
+                <span className="price">{room.price}</span>
               </div>
-            ))}
-          </div>
+            </animated.div>
+          ))}
         </div>
       </div>
     </ParallaxLayer>

@@ -49,11 +49,14 @@ const App: React.FC = () => {
       />
       <Navbar scrolled={isNavbarScrolled} />
 
-      <Parallax pages={2.5} ref={parallaxRef}>
-        <ParallaxLayer offset={0} speed={1}>
+      <Parallax pages={3} ref={parallaxRef} horizontal={false}>
+        <ParallaxLayer offset={0} speed={0}>
           <Hero />
         </ParallaxLayer>
-        <Rooms />
+        <ParallaxLayer offset={0} speed={1}>
+          <Rooms />
+        </ParallaxLayer>
+
         <ParallaxLayer offset={1} speed={1}>
           <About />
         </ParallaxLayer>
