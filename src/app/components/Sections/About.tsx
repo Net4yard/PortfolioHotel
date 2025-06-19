@@ -139,15 +139,14 @@ const About: React.FC = () => {
   }, []);
 
   return (
-    <ParallaxLayer
-      offset={1.0}
-      speed={0}
+    <div
       style={{
         display: "flex",
         alignItems: "center",
         justifyContent: "center",
-        // backgroundImage and backgroundSize are removed as AnimatedImageGrid handles the background
-        position: "relative", // Ensures AnimatedImageGrid is positioned relative to this layer
+        paddingTop: "200px",
+        paddingBottom: "200px",
+        position: "relative",
       }}
     >
       <AnimatedImageGrid />
@@ -186,7 +185,7 @@ const About: React.FC = () => {
           </div>
         </div>
       </div>
-    </ParallaxLayer>
+    </div>
   );
 };
 

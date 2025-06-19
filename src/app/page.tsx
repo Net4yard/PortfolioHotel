@@ -56,7 +56,6 @@ const App: React.FC = () => {
         <ParallaxLayer offset={0} speed={1}>
           <Rooms />
         </ParallaxLayer>
-
         <ParallaxLayer offset={1} speed={1}>
           <About />
         </ParallaxLayer>
