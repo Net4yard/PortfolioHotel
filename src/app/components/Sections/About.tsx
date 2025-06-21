@@ -32,12 +32,12 @@ const AnimatedImageGrid: React.FC = () => {
     "https://images.pexels.com/photos/261102/pexels-photo-261102.jpeg",
   ];
   const gridConfig = {
-    rows: 1, // Number of rows in the grid
-    cols: 2, // Number of columns in the grid
+    rows: 1,
+    cols: 2,
     get numTiles() {
       return this.rows * this.cols;
     },
-    imageScale: 250, // Percentage for backgroundSize, e.g., 250%
+    imageScale: 200,
   };
 
   const springs = useSprings(
@@ -45,10 +45,7 @@ const AnimatedImageGrid: React.FC = () => {
     Array.from({ length: gridConfig.numTiles }).map((_, i) => ({
       from: { backgroundPositionX: "0%", backgroundPositionY: "0%" },
       to: async (next: (props: any) => Promise<any>) => {
-        // eslint-disable-next-line no-constant-condition
         while (true) {
-          // Each step in the loop defines a new target for backgroundPosition
-          // Randomizing target positions and durations for variety
           const animProps = {
             config: {
               duration: 10000 + Math.random() * 8000,
@@ -70,10 +67,10 @@ const AnimatedImageGrid: React.FC = () => {
             backgroundPositionX: `${Math.random() * 50}%`,
             backgroundPositionY: `${Math.random() * 50}%`,
             ...animProps,
-          }); // Move towards a general area
+          });
         }
       },
-      delay: i * 1800, // Stagger the start of each tile's animation
+      delay: i * 1800,
     }))
   );
 
@@ -88,8 +85,7 @@ const AnimatedImageGrid: React.FC = () => {
         display: "grid",
         gridTemplateColumns: `repeat(${gridConfig.cols}, 1fr)`,
         gridTemplateRows: `repeat(${gridConfig.rows}, 1fr)`,
-        overflow: "hidden", // Important to clip the oversized background images
-        // Places the grid behind other content in this ParallaxLayer
+        overflow: "hidden",
       }}
     >
       {springs.map((springStyle, index) => (
@@ -100,8 +96,8 @@ const AnimatedImageGrid: React.FC = () => {
             width: "100%",
             height: "100%",
             backgroundImage: `url(${imageUrl[index % imageUrl.length]})`,
-            backgroundSize: `${gridConfig.imageScale}% ${gridConfig.imageScale}%`, // Makes image larger than tile for panning
-            willChange: "background-position", // Hint for browser optimization
+            backgroundSize: `${gridConfig.imageScale}% ${gridConfig.imageScale}%`,
+            willChange: "background-position",
           }}
         />
       ))}
@@ -121,11 +117,11 @@ const About: React.FC = () => {
       ([entry]) => {
         if (entry.isIntersecting) {
           setIsInView(true);
-          observer.unobserve(currentRef); // Animate only once
+          observer.unobserve(currentRef);
         }
       },
       {
-        threshold: 0.1, // Trigger when 10% of the element is visible
+        threshold: 0.1,
       }
     );
 
@@ -157,7 +153,7 @@ const About: React.FC = () => {
           display: "flex",
           alignItems: "center",
           justifyContent: "center",
-          zIndex: 1, // Ensures this content wrapper is above the AnimatedImageGrid
+          zIndex: 1,
         }}
       >
         <div className="about-container">
