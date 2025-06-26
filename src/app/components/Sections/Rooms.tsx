@@ -56,8 +56,10 @@ const rooms: Room[] = [
 ];
 
 const Rooms: React.FC = () => {
-  const [selectedCard, setSelectedCard] = useState<number | null>(null);
+  let [selectedCard, setSelectedCard] = useState<number | null>(null);
   const [currentImageIndex, setCurrentImageIndex] = useState(0);
+
+  selectedCard = 1;
 
   // Background fade animation
   const bgStyle = useSpring({

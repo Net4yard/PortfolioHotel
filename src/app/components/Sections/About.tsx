@@ -32,12 +32,12 @@ const AnimatedImageGrid: React.FC = () => {
     "https://images.pexels.com/photos/261102/pexels-photo-261102.jpeg",
   ];
   const gridConfig = {
-    rows: 1, // Number of rows in the grid
-    cols: 2, // Number of columns in the grid
+    rows: 1,
+    cols: 2,
     get numTiles() {
       return this.rows * this.cols;
     },
-    imageScale: 250, // Percentage for backgroundSize, e.g., 250%
+    imageScale: 250,
   };
 
   const springs = useSprings(
@@ -45,10 +45,7 @@ const AnimatedImageGrid: React.FC = () => {
     Array.from({ length: gridConfig.numTiles }).map((_, i) => ({
       from: { backgroundPositionX: "0%", backgroundPositionY: "0%" },
       to: async (next: (props: any) => Promise<any>) => {
-        // eslint-disable-next-line no-constant-condition
         while (true) {
-          // Each step in the loop defines a new target for backgroundPosition
-          // Randomizing target positions and durations for variety
           const animProps = {
             config: {
               duration: 10000 + Math.random() * 8000,
