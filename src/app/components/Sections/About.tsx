@@ -67,10 +67,10 @@ const AnimatedImageGrid: React.FC = () => {
             backgroundPositionX: `${Math.random() * 50}%`,
             backgroundPositionY: `${Math.random() * 50}%`,
             ...animProps,
-          }); // Move towards a general area
+          });
         }
       },
-      delay: i * 1800, // Stagger the start of each tile's animation
+      delay: i * 1800,
     }))
   );
 
@@ -85,8 +85,7 @@ const AnimatedImageGrid: React.FC = () => {
         display: "grid",
         gridTemplateColumns: `repeat(${gridConfig.cols}, 1fr)`,
         gridTemplateRows: `repeat(${gridConfig.rows}, 1fr)`,
-        overflow: "hidden", // Important to clip the oversized background images
-        // Places the grid behind other content in this ParallaxLayer
+        overflow: "hidden",
       }}
     >
       {springs.map((springStyle, index) => (
@@ -97,8 +96,8 @@ const AnimatedImageGrid: React.FC = () => {
             width: "100%",
             height: "100%",
             backgroundImage: `url(${imageUrl[index % imageUrl.length]})`,
-            backgroundSize: `${gridConfig.imageScale}% ${gridConfig.imageScale}%`, // Makes image larger than tile for panning
-            willChange: "background-position", // Hint for browser optimization
+            backgroundSize: `${gridConfig.imageScale}% ${gridConfig.imageScale}%`,
+            willChange: "background-position",
           }}
         />
       ))}
@@ -118,11 +117,11 @@ const About: React.FC = () => {
       ([entry]) => {
         if (entry.isIntersecting) {
           setIsInView(true);
-          observer.unobserve(currentRef); // Animate only once
+          observer.unobserve(currentRef);
         }
       },
       {
-        threshold: 0.1, // Trigger when 10% of the element is visible
+        threshold: 0.1,
       }
     );
 
@@ -154,7 +153,7 @@ const About: React.FC = () => {
           display: "flex",
           alignItems: "center",
           justifyContent: "center",
-          zIndex: 1, // Ensures this content wrapper is above the AnimatedImageGrid
+          zIndex: 1,
         }}
       >
         <div className="about-container">

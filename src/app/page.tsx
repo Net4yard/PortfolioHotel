@@ -31,13 +31,12 @@ const App: React.FC = () => {
 
     if (scrollContainer) {
       scrollContainer.addEventListener("scroll", handleScroll);
-      // Initial check in case the page loads scrolled or content is above the fold
       handleScroll();
       return () => {
         scrollContainer.removeEventListener("scroll", handleScroll);
       };
     }
-  }, []); // Empty dependency array ensures this runs once after mount and cleans up on unmount
+  }, []);
 
   return (
     <div>

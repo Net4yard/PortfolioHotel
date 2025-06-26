@@ -67,7 +67,6 @@ const Rooms: React.FC = () => {
     config: { duration: 800 },
   });
 
-  // Card hover animation - removed the opacity animation
   const getCardAnimation = (roomId: number) => {
     return useSpring({
       transform: selectedCard === roomId ? "scale(1.05)" : "scale(1)",
@@ -75,7 +74,6 @@ const Rooms: React.FC = () => {
     });
   };
 
-  // Room image hover animation
   const getRoomImageAnimation = (roomId: number) => {
     return useSpring({
       opacity: selectedCard === roomId ? 1 : 0,
@@ -83,7 +81,6 @@ const Rooms: React.FC = () => {
     });
   };
 
-  // Image cycling effect
   React.useEffect(() => {
     let interval: NodeJS.Timeout;
     if (selectedCard) {
