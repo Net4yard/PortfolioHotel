@@ -8,7 +8,7 @@ import Rooms from "./components/Sections/Rooms";
 import "./styles/globals.css";
 import AnimatedCursor from "react-animated-cursor";
 
-const App: React.FC = () => {
+export default function Page() {
   const [isNavbarScrolled, setIsNavbarScrolled] = useState(false);
   const parallaxRef = useRef<IParallax>(null);
 
@@ -58,6 +58,4 @@ const App: React.FC = () => {
       </Parallax>
     </div>
   );
-};
-
-export default App;
+}
