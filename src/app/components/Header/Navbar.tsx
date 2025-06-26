@@ -1,7 +1,7 @@
 "use client";
 import React from "react";
 import Link from "next/link";
-import "./Navbar.css";
+import "./navbar.css";
 
 interface NavbarProps {
   scrolled: boolean;

@@ -5,9 +5,6 @@ import Navbar from "./components/Header/Navbar";
 import Hero from "./components/Sections/Hero";
 import About from "./components/Sections/About";
 import Rooms from "./components/Sections/Rooms";
-import Amenities from "./components/Sections/Amenities";
-import Contact from "./components/Sections/Contact";
-import Footer from "./components/Footer/Footer";
 import "./styles/globals.css";
 import AnimatedCursor from "react-animated-cursor";
 
